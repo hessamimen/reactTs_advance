@@ -1,19 +1,18 @@
 import { useRef } from "react";
 import Input from "./components/Input";
-import Form from "./components/Form";
+import Form, { type FormHandle } from "./components/Form";
 import Button from "./components/Button";
 
 function App() {
-  // const input = useRef<HTMLInputElement>(null);
+  const customForm = useRef<FormHandle>(null);
 
   function handleSave(data: unknown) {
-    console.log("data", data);
     const extractedData = data as { name: string; age: string };
-    // console.log(extractedData);
+    customForm.current?.clear();
   }
   return (
     <main>
-      <Form onSave={handleSave}>
+      <Form onSave={handleSave} ref={customForm}>
         <Input type="text" label="name" id="name" />
         <Input type="number" label="age" id="age" />
         <p>
